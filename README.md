@@ -39,6 +39,8 @@ If you're interested in contributing to Prompt Editor, please get in touch with 
 The logo for Prompt Editor was created using the [MidJourney](https://www.midjourney.com/) image generation model.
 
 ## About dev2bit
-![dev2bit](https://dev2bit.com/wp-content/themes/lovecraft_child/assets/icons/dev2bit_monitor2.svg =250x250) 
+<p align="center">
+  <img width="460" height="300" src="https://dev2bit.com/wp-content/themes/lovecraft_child/assets/icons/dev2bit_monitor2.svg">
+</p>
 [dev2bit](https://dev2bit.com) is a software development company dedicated to providing innovative and high-quality solutions to our clients. Our team has extensive experience in software development, and we are committed to delivering exceptional results to our customers.
 
