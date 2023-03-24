@@ -1,0 +1,2 @@
+UI.init();
+Handlers.init(); 

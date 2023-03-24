@@ -1,0 +1,626 @@
+#prompts-ui + main {
+    width: 70% !important;
+}
+
+#prompts-ui {
+    width: 30%;
+    height: 100%;
+    background-color: #656870;
+    padding: 12px;
+}
+
+#prompts-prompt {
+    width: 100%;
+    height: 70%;
+    padding: 24px 12px;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+}
+
+#prompts-prompt-control {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+#prompts-prompt-control-title {
+    display: block;
+    margin-bottom: 4px;
+    color: white;
+}
+
+#prompts-prompt-control-select {
+    border: 1px solid white;
+    height: 25px;
+    font-size: 12px;
+    padding: 0 30px 0 15px;
+    color: black;
+}
+
+#prompts-textarea {
+    width: 100%;
+    height: 100%;
+}
+
+#prompts-prompt-control-bottom {
+    width: 100%;
+    height: 30px;
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+#prompts-prompt-control-bottom-button-init,
+#prompts-prompt-control-bottom-button-sync{
+    width: 80%;
+    margin: 0 auto;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    background: #31c098;
+    color: black;
+    border: none;
+}
+
+#prompts-prompt-control-bottom-button-sync{
+    background: white;
+    color: black;
+    border: 1px solid #EEE;
+}
+
+.select-block {
+    display: flex;
+}
+
+.select-controls {
+    display: flex;
+    flex-direction: column;
+    min-width: 20px;
+    height: 40px;
+    text-align: center;
+    line-height: 20px;
+    background: white;
+    cursor: pointer;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.select-block select {
+    height: 40px;
+    border: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.CodeMirror, .CodeMirror-scroll {
+    min-height: calc(100% - 165px) !important;
+}
+
+.editor-toolbar {
+    border: 1px solid white;
+    margin-top: 20px;
+}
+
+.editor-toolbar.fullscreen {
+    width: auto;
+    height: auto;
+    white-space: wrap;
+    padding-top: auto;
+    padding-bottom: auto;
+    box-sizing: border-box;
+    position: relative;
+    top: auto;
+    left: auto;
+    opacity: 1;
+    z-index: 1;
+    background: rgb(255, 255, 255);
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    display: block;
+    z-index: auto;
+    overflow: inherit;
+    border-radius: 4px;
+}
+
+
+
+.editor-toolbar {
+    background: white;
+}
+
+
+
+select#prompts-prompt-control-original,
+select#prompts-prompt-control-prompts,
+select#prompts-prompt-control-subprompts {
+    font-size: 10px;
+    height: 32px;
+    line-height: 10px;
+    min-width: 100px;
+}
+
+select#prompts-prompt-control-prompts + div span,
+select#prompts-prompt-control-subprompts + div span {
+    line-height: 16px;
+}
+
+
+select#prompts-prompt-control-prompts + div,
+select#prompts-prompt-control-subprompts + div {
+    height: 32px;
+}
+
+select#prompts-prompt-control-prompts {
+    width: 100%;
+    display: none;
+    max-width: max-content ;
+    float: right;
+}
+
+[multiple]:focus, [type=date]:focus, [type=datetime-local]:focus, [type=email]:focus, [type=month]:focus, [type=number]:focus, [type=password]:focus, [type=search]:focus, [type=tel]:focus, [type=text]:focus, [type=time]:focus, [type=url]:focus, [type=week]:focus, select:focus, textarea:focus {
+    --tw-ring-color: none !important;
+    --tw-ring-offset-color: none !important;
+    --tw-ring-offset-width: none !important;
+    --tw-ring-offset-shadow: none !important;
+}
+
+div#prompts-fastresponse {
+    height: calc(30% - 12px);
+    border: 1px solid white;
+    margin-top: 12px;
+    display: flex;
+    border-radius: 4px;
+    flex-direction: column;
+}
+
+ul#list-prompts-fastresponse {
+    width: 100%;
+    height: 100%;
+}
+
+.list-controls {border-top: 1px solid white;text-align: center;background-color: white;}
+
+ul#list-prompts-fastresponse {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 0;
+    overflow-y: auto;
+    grid-auto-rows: max-content;
+    padding-right: 0;
+    margin: 0;
+    background: white;
+}
+
+ul#list-prompts-fastresponse.two-columns  {
+    grid-template-columns: 1fr 1fr;
+}
+
+ul#list-prompts-fastresponse li {
+    border: 1px solid white;
+    padding: 4px;
+    font-size: 12px;
+    background: #ffe6b1;
+    cursor: pointer;
+}
+
+.list-controls > span {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.list-block li {
+    position: relative;
+}
+
+span.list-item-edit,
+span.list-item-del {
+    position: absolute;
+    height: 100%;
+    margin-top: 2px;
+    right: 8px;
+    padding: 0px 10px;
+    color: grey;
+    display: none;
+}
+
+span.list-item-edit {
+    right: 30px;
+}
+
+li:hover span.list-item-edit,
+li:hover span.list-item-del {
+    display: inline-block;
+}
+
+.editor-statusbar {
+    color: whitesmoke;
+}
+
+.CodeMirror pre {
+    font-size: 14px;
+}
+
+.editor-toolbar > a {
+    font-size: 12px;
+    line-height: 11px;
+}
+
+.editor-toolbar::before,
+.editor-toolbar::after {
+    margin: 0px;
+}
+
+img#prompts-prompt-control-title {
+    width: 45%;
+}
+
+div#prompts-prompt-control {
+    gap: 3px;
+}
+
+a#prompts-prompt-control-empty,
+a#prompts-prompt-control-options {
+    background: white;
+    display: block;
+    padding: 7px;
+    border-radius: 4px;
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+    padding: 50px 12px;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+label {margin-bottom: 10px;display: block;}
+
+.form-options {
+    display: flex;
+    gap: 12px;
+}
+
+.select-controls > span {
+    color: gray;
+}
+
+.select-controls > span:hover {
+    color: black;
+}
+
+button#prompts-prompt-control-bottom-button-sync {
+    font-size: 19px;
+}
+
+button#prompts-prompt-control-bottom-button-init {
+    font-weight: 700;
+}
+
+.CodeMirror .CodeMirror-code .cm-header-1 {
+    font-size: 150%;
+}
+
+.CodeMirror .CodeMirror-code .cm-header-2 {
+    font-size: 130%;
+}
+
+.CodeMirror .CodeMirror-code .cm-header-3 {
+    font-size: 100%;
+}
+
+
+
+div#block-prompts-prompt-control-subprompts {
+    width: 350%;
+}
+
+select#prompts-prompt-control-subprompts {min-width: auto;width: 100%;}
+
+div#block-prompts-prompt-control-prompts {
+    width: 65%;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.CodeMirror-fullscreen {
+    margin-left: calc(260px + 25.9%);
+    top: 0;
+}
+
+main.prompt-editor-run > .flex-1 .flex-col > div:nth-child(2) {
+    display: none;
+}
+
+#block-prompts-prompt-control-original {
+    position: absolute;
+    right: 0;
+    top: -60px;
+}
+
+div#block-prompts-prompt-control-original {
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+}
+
+div#block-prompts-prompt-control-original > div {
+    display: none;
+}
+
+
+div#prompts-prompt-subprompts-list {
+    display: none;
+    width: 100%;
+    background: white;
+    min-height: calc(100% - 160px);
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+ul#list-prompts-prompt-subprompts-list {
+    height: 100%;
+    overflow: auto;
+    padding: 4px;
+}
+
+ul#list-prompts-prompt-subprompts-list li {
+    margin: 4px;
+    padding: 4px 12px;
+    background: #ffe6b1;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.CodeMirror-fullscreen ~ div#prompts-prompt-subprompts-list {
+    display: flex;
+}
+
+.dark\:text-gray-200.lg\:m-auto.lg\:max-w-3xl.mb-2.md\:mx-4.md\:text-sm.mx-2.stretch.text-center.text-gray-600.text-xs {bottom: 2px;position: absolute;width: 100%;max-width: 100%;font-size: 10px;}
+
+div#block-prompts-prompt-control-original {top: -46px;box-shadow: -1px 1px 8px #e7e7e7;}
+
+
+.select-block .nice-select {
+    border-radius: 4px 0 0 4px;
+    height: 100%;
+    font-size: 12px;
+    min-width: 120px;
+    max-width: 180px;
+    border-width: 0;
+}
+
+.nice-select .current {
+    max-width: 100%;
+    overflow: hidden;
+    display: block;
+    height: 100%;
+    line-height: 32px !important;
+}
+
+.editor-toolbar i.separator {
+    overflow: hidden;
+    line-height: 11px;
+}
+
+#block-prompts-prompt-control-prompts .select-controls,
+#block-prompts-prompt-control-subprompts .select-controls {
+    height: 32px;
+    line-height: 28px;
+}
+
+.list span.select-controls-edit,
+.list span.select-controls-del {
+    margin-left: 12px;
+    position: absolute;
+    height: 100%;
+    right: 0;
+    line-height: 36px !important;
+    margin: 0 8px;
+    /* background: red; */
+}
+
+.list span.select-controls-edit {
+    right: 32px;
+}
+
+.nice-select-dropdown li {
+    /* display: flex; */
+    position: relative;
+}
+
+.nice-select-dropdown li span{
+    display: none;
+}
+
+.nice-select-dropdown li:hover span{
+    display: inline-block;
+    color: grey;
+}
+
+
+.nice-select-dropdown li:hover span:hover{
+    color: black;
+}
+
+.nice-select-dropdown ul {
+    min-width: 350px;
+}
+
+input.nice-select-search:focus {border-color: grey;}
+
+div#block-prompts-prompt-control-prompts .select-controls {
+    display: none;
+}
+
+div#block-prompts-prompt-control-prompts .nice-select {
+    border-radius: 4px;
+}
+
+span.select-controls-add {
+    margin-right: 8px;
+    font-weight: 700;
+}
+
+#prompts-prompt-subprompts-list .select-controls-add,
+#prompts-fastresponse .select-controls-add {
+    display: none;
+}
+
+#prompts-prompt-subprompts-list:hover .select-controls-add,
+#prompts-fastresponse:hover .select-controls-add {
+    display: inline-block;
+}
+
+.nice-select .nice-select-search {
+    min-height: 22px;
+    font-size: 12px;
+    padding: 4px 12px;
+}
+
+div#popup-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.6);
+    z-index: 99;
+}
+
+div#popup {
+    position: fixed;
+    z-index: 999999999;
+    top: 10%;
+    left: 30%;
+    right: 30%;
+    background: white;
+    padding: 24px;
+}
+
+div#popup-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.6);
+    z-index: 99;
+}
+
+div#popup {
+    position: fixed;
+    z-index: 999999999;
+    top: 10%;
+    left: 30%;
+    right: 30%;
+    background: white;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 9px;
+}
+
+.popup-title {
+    text-align: center;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.popup-buttons {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+button.popup-button {
+    min-width: 120px;
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+
+div#popup.error {
+    background: #ffc8c8;
+}
+
+.error .popup-button {
+    background: white;
+}
+
+input.popup-form-input {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.popup-form-field {
+    margin-bottom: 24px;
+}
+
+textarea.popup-form-input {
+    width: 100%;
+    height: 220px;
+    min-height: 220px;
+    border-radius: 4px;
+    padding: 24px 12px;
+}
+
+button.popup-button.popup-button-save {
+    background: #31c098;
+    color: white;
+    font-weight: 700;
+}
+
+button#prompts-prompt-control-bottom-button-sync.no-sync {
+    background: #ffe6b1;
+    border: none;
+}
+
+#list-prompts-prompt-subprompts-list span.list-item-title {
+    font-size: 12px;
+}
+
+@media (max-width: 1900px) {
+    .editor-statusbar,
+    a[title="Markdown Guide"] {
+        display: none;
+    }
+    
+}
+
+@media (max-width: 1200px) {
+    div#block-prompts-prompt-control-prompts {
+        width: 100%;
+    }
+    #prompts-prompt-control-title {
+        display: none;
+    }
+    
+}
+@media (max-width: 1000px) {
+    .editor-toolbar {
+        display: none;
+    }
+    
+}
+

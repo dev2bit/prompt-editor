@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Prompt Editor",
+  "version": "1.0",
+  "icons": {
+      "1024": "assets/icons/1024.png",
+      "128": "assets/icons/128.png",
+      "16": "assets/icons/16.png",
+      "256": "assets/icons/256.png",
+      "48": "assets/icons/48.png",
+      "512": "assets/icons/512.png",
+      "64": "assets/icons/64.png",
+      "72": "assets/icons/72.png",
+      "80": "assets/icons/80.png",
+      "92": "assets/icons/92.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://chat.openai.com/*"],
+      "js": [
+        "vendor/popup/popup.js",
+        "vendor/nice-select2/js/nice-select2.js", 
+        "vendor/simplemde/simplemde.min.js", 
+        "class/options.js", 
+        "class/ui.js", 
+        "class/models.js", 
+        "class/handlers.js", 
+        "main.js"
+      ],
+      "css": [
+        "vendor/nice-select2/css/nice-select2.css", 
+        "vendor/simplemde/simplemde.min.css", 
+        "assets/css/styles.css"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [{
+    "resources":["assets/img/logo.png"],
+    "matches": ["*://chat.openai.com/*"]
+  }],
+  "options_page": "pages/options.html"
+}
