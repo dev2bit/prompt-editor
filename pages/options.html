@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configuración de mi extensión</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://platform.linkedin.com ">
+    
+    <style>
+        .container {
+            width: 40%;
+            margin: auto;
+            padding: 50px 12px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 23px;
+        }
+
+        .form-options {
+            display: flex;
+            gap: 12px;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        button#save {
+            width: 100%;
+            height: 44px;
+            background: rgb(49, 192, 152);
+            color: #fff;
+            border: 0;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 18px;
+            letter-spacing: 4px;
+            margin-top: 28px;
+            cursor: pointer;
+        }
+
+        .title-container {margin-bottom: 24px;}
+
+        .sync,
+        .github {
+            display: none;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="/assets/img/logo.png" alt="logo" class="logo">
+        </div>
+        <div class="title-container">
+            <h1 class="title">Configuration</h1>
+        </div>
+        <div class="form-container">
+            <div class="form-group">
+                <label for="storage">Storage Type</label>
+                <div class="form-options">
+                    <label><input type="radio" name="storage" id="local" value="local" checked>Local Storage</label>
+                    <label><input type="radio" name="storage" id="sync" value="sync">Web Storage</label>
+                    <label><input type="radio" name="storage" id="github" value="github">Github</label>
+                </div>
+            </div>
+            <div class="form-group sync">
+                <label for="sync-get">GET URL </label>
+                <input type="text" name="sync-get" id="sync-get" class="form-control">
+            </div>
+            <div class="form-group sync">
+                <label for="sync-put">PUT URL </label>
+                <input type="text" name="sync-put" id="sync-put" class="form-control">
+            </div>
+            <div class="form-group github">
+                <label for="github-token">Github Token</label>
+                <input type="text" name="github-token" id="github-token" class="form-control">
+            </div>
+            <div class="form-group github">
+                <label for="github-owner">Github Owner</label>
+                <input type="text" name="github-owner" id="github-owner" class="form-control">
+            </div>
+            <div class="form-group github">
+                <label for="github-repository">Github Repository</label>
+                <input type="text" name="github-repository" id="github-repository" class="form-control">
+
+            </div>
+            <div class="form-group github">
+                <label for="github-path">Github Path</label>
+                <input type="text" name="github-path" id="github-path" class="form-control">
+            </div>
+            <div class="form-group save">
+                <button class="btn btn-primary" id="save">Save</button>
+            </div>
+        </div>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>
