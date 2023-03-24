@@ -2,7 +2,7 @@
 
 <p align="center">
   <br/>
-  <img width="460" height="300" src="https://raw.githubusercontent.com/dev2bit/prompt-editor/master/assets/img/logo.png">
+  <img src="https://raw.githubusercontent.com/dev2bit/prompt-editor/master/assets/img/logo.png">
   <br/>
 </p>
 
