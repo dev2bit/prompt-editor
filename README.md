@@ -1,6 +1,10 @@
 # Prompt Editor
 
-![Prompt Editor](https://raw.githubusercontent.com/dev2bit/prompt-editor/master/assets/img/logo.png)
+<p align="center">
+  <br/>
+  <img width="460" height="300" src="https://raw.githubusercontent.com/dev2bit/prompt-editor/master/assets/img/logo.png">
+  <br/>
+</p>
 
 Prompt Editor is a Google Chrome extension designed to manage and edit prompts efficiently and effortlessly. Initially integrated with ChatGPT, the project aims to expand its compatibility with other language models in the future.
 
