@@ -438,7 +438,6 @@ class HandlerPromptTemplatesSelect extends HandlerTargetSelect {
         if (!title) {
             throw new Error('Title is empty');
         }
-        // let template = UI.prompt_simplemde.value().replace(/\[\[.*\]\]/g, '[[PROMPT]]');
         UI.prompt_simplemde.value('');
         UI.prompt_simplemde.codemirror.setCursor(0, 0);
         UI.prompt_simplemde.codemirror.focus();
@@ -459,7 +458,11 @@ class HandlerPromptTemplatesSelect extends HandlerTargetSelect {
     static delete (){
         UI.prompt_simplemde.value('');
     }
+
+
 }
+
+
 
 
 class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
@@ -709,6 +712,23 @@ class Handlers {
             HandlerSubPromptsSelect.init(UI.subprompt_select);
             HandlerSubPromptsList.init(UI.subprompt_list);
             HandlerFastResponsesList.init(UI.fastresponse);
+            UI.original_send.addEventListener('click', () => {
+                if (HandlerPromptTemplatesOrinalText.target.value){
+                    let template = HandlerPromptTemplatesOrinalText.target.value.template;
+                    let text = UI.original_text.value;
+                    let result = template.replace(/\[\[PROMPT\]\]/g, text);
+                    UI.original_text.value = result;
+                    HandlerPromptTemplatesOrinalText.select.value = "";
+                    HandlerPromptTemplatesOrinalText.target.value = null;
+                    HandlerPromptTemplatesOrinalText.selected = "";
+                    setTimeout(() => {
+                        const block_first = document.querySelector('.flex + .group');
+                        if (block_first) {
+                            block_first.style.display = 'none';
+                        }
+                    }, 200);
+                }
+            });
         });
         
     }   

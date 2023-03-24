@@ -346,7 +346,8 @@ div#block-prompts-prompt-control-prompts {
     top: 0;
 }
 
-main.prompt-editor-run > .flex-1 .flex-col > div:nth-child(2) {
+main.prompt-editor-run > .flex-1 .flex-col > .flex + div.group ,
+main.prompt-editor-run > .flex-1 .flex-col > div.group:first-child {
     display: none;
 }
 
