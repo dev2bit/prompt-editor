@@ -1,3 +1,20 @@
+/*!
+ * Prompt Editor (https://github.com/dev2bit/prompt-editor)
+ * dev2bit (developers@dev2bit.com)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
 class Target {
     static value = null;
     static model = null;
@@ -46,9 +63,11 @@ class HandlerTargetSelect extends HandlerTarget{
     });
     this.select.addEventListener('keypress', (e) => {
         if (e.keyCode == 13) {
+
             this.select_item();
             this.target.value = this.target.model.find(this.selected);
             this.change(this.target.model.find(this.selected));    
+
         }
         this.keypress(e);
         if (this.select_nice){
@@ -132,13 +151,9 @@ class HandlerTargetSelect extends HandlerTarget{
     this.selected = this.select.value;
   }
 
-  static change (item) {
-    console.log(item);
-  }
+  static change (item) {}
 
-  static keypress (e) {
-    console.log(e);
-  }
+  static keypress (e) {}
 
   static async update (not_refresh) {
     
@@ -293,9 +308,7 @@ class HandlerTargetList extends HandlerTarget{
   }
 
 
-  static change (item) {
-    console.log(item);
-  }
+  static change (item) {}
 
   static async update (not_refresh) {
     
@@ -379,358 +392,12 @@ class HandlerTargetClick extends HandlerTarget {
     static item = null;
 
     static init (item) {
-        if (!this.target) {
-            throw new Error('Target not defined');
-        }
         if (!item) {
             throw new Error('Item not defined');
         }
         this.item = item;
         this.item.addEventListener('click', () => {
-            this.click(this.target.value);
+            this.click(this.target ? this.target.value : null);
         });
     }
 }
-//------------------ Prompt ------------------//
-
-class TargetPrompt {
-    static model = PromptsModel;
-}
-
-class HandlerPromptTemplatesSelect extends HandlerTargetSelect {
-    static target = TargetPrompt;
-    static select_nice = null;
-    static default = 'Prompts';
-    static entity = 'prompt';
-    static has_add_btn = false;
-    static form = {
-        title: {
-            type: 'text',
-            label: 'Title',
-            required: true,
-        },
-        template: {
-            default: '[[PROMPT]]',
-        },
-    };
-
-
-    static new_item (data) {
-        HandlerPromptTemplatesClickSync.set_sync();
-    }
-
-    static change (item) {
-        let prompt_text = UI.original_text.value.trim();
-        if (item) {
-            let text = item.template;
-            if (item.template != '[[PROMPT]]') {
-                text = item.template.replace('[[PROMPT]]', '[[' + prompt_text + ']]');
-            }
-            UI.prompt_simplemde.value(text);
-        }else {
-            UI.prompt_simplemde.value('');
-        }
-        HandlerPromptTemplatesClickSync.set_sync();
-    }
-
-    static promptData () {
-        let title = prompt('Title', '');
-        if (!title) {
-            throw new Error('Title is empty');
-        }
-        UI.prompt_simplemde.value('');
-        UI.prompt_simplemde.codemirror.setCursor(0, 0);
-        UI.prompt_simplemde.codemirror.focus();
-        return {'title': title, 'template': ""};
-    }
-
-    static keypress (e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-            HandlerPromptTemplatesClickInit.click(this.target.value);
-            this.selected = "";
-            this.select.value = "";
-            this.target.value = null;
-            UI.original_text.focus();
-        }
-    }
-
-    static delete (){
-        UI.prompt_simplemde.value('');
-    }
-
-
-}
-
-
-
-
-class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
-    static target = TargetPrompt;
-    static is_nice = false; 
-    static select_nice = null;
-
-}
-
-
-class HandlerPromptTemplatesClickEmpty extends HandlerTargetClick {
-    static target = TargetPrompt;
-    static select_version = null;
-    static async click (item) {
-        HandlerPromptTemplatesSelect.select.value = "";
-        HandlerPromptTemplatesSelect.selected = "";
-        HandlerPromptTemplatesSelect.target.value = null;
-        UI.prompt_simplemde.value('');
-        HandlerPromptTemplatesSelect.select.dispatchEvent(new Event('change'));
-    }
-}
-
-class HandlerPromptTemplatesClickInit extends HandlerTargetClick {
-    static target = TargetPrompt;
-    static select_version = null;
-    static async click (item) {
-        const btn_first = document.querySelector('.text-base .p-1');
-        if (btn_first) {
-            let btn_new = document.querySelector('nav a.mb-2');
-            if (btn_new) {
-                btn_new.click();
-                await new Promise(r => setTimeout(r, 200));
-                if (this.select_version){
-                    document.querySelector('.items-center button').click();
-                    await new Promise(r => setTimeout(r, 200));
-                    document.querySelectorAll('.items-center li span > span').forEach(item => {
-                        if (item.innerHTML == this.select_version) {
-                            item.click();
-                        }
-                    });
-                }
-            }
-        }else {
-            this.select_version = document.querySelector('span.flex.h-6.items-center.gap-1.truncate');
-            if (this.select_version) {
-                this.select_version = this.select_version.innerHTML;
-            }
-        }
-        UI.original_text.value = UI.prompt_simplemde.value();
-        const button = UI.original_send;
-        UI.main.classList.add('prompt-editor-run');
-        button.click();
-        setTimeout(() => {
-            const block_first = document.querySelector('.flex + .group');
-            if (block_first) {
-                block_first.style.display = 'none';
-            }
-        }, 200);
-    }
-}
-
-class HandlerPromptTemplatesClickSync extends HandlerTargetClick {
-    static target = TargetPrompt;
-    static init (item) {
-        super.init(item);
-        UI.prompt_simplemde.codemirror.on("change", () => {
-	        this.set_no_sync();
-        });
-    }
-    static set_no_sync () {
-        this.item.classList.add('no-sync');
-    }    
-    
-    static set_sync () {
-        this.item.classList.remove('no-sync');
-    }
-
-    static async click (item) {
-        try {
-            await HandlerPromptTemplatesSelect.target.model.getData();
-            if (item) {
-                item = HandlerPromptTemplatesSelect.target.model.find(item.id);
-            }else {
-                item = {};
-                PromptsModel.add(item);
-                if (!await showPopupForm("New Prompt", HandlerPromptTemplatesSelect.form, item).catch(e => {
-                    throw e;
-                })) {
-                    return;
-                }
-            }
-            let template = UI.prompt_simplemde.value().replace(/\[\[.*\]\]/g, '[[PROMPT]]');
-            item.template = template;
-            await HandlerPromptTemplatesSelect.update(true);    
-            await HandlerPromptTemplatesSelect.target.model.setData();
-            HandlerPromptTemplatesClickSync.set_sync();
-            HandlerPromptTemplatesSelect.select.value = item.id;
-            HandlerPromptTemplatesSelect.selected = item.id;
-            HandlerPromptTemplatesSelect.target.value = this.target.model.find(item.id);
-            HandlerPromptTemplatesSelect.select.dispatchEvent(new Event('change'));
-        }catch (e) {
-            console.log(e);
-        }
-    }
-}
-
-//------------------ Subprompt ------------------//
-class TargetSubprompt {
-    static model = SubpromptsModel;
-}
-
-class HandlerSubPromptsSelect extends HandlerTargetSelect {
-    static target = TargetSubprompt;
-    static is_nice_search = false;
-    static default = 'Insert fast instruction';
-    static entity = 'subprompt';
-    static is_new_items_selected = false;
-    static form = {
-        'title': {
-            'label': 'Title',
-            'type': 'text',
-            'required': true,
-        },
-        'text': {
-            'label': 'Text',
-            'type': 'textarea',
-            'required': true,
-        },
-    };
-    static update (not_refresh, jump) {
-        super.update(not_refresh);
-         if (jump) return;
-        HandlerSubPromptsList.update(not_refresh, true);
-    }
-    
-    static change (item) {
-        var cm = UI.prompt_simplemde.codemirror;
-        var startPoint = cm.getCursor('start');
-        var endPoint = cm.getCursor('end');
-        cm.replaceRange(item.text, startPoint, endPoint);
-        this.selected = "";
-        this.select.value = "";
-        this.target.value = null;
-        let text = item.text + ((item.text[item.text.length - 1] == '.' || item.text[item.text.length - 1] == ' ') ? '' : ' ');
-        let last_line = text.split('\n')[text.split('\n').length - 1];
-        endPoint.ch += last_line.length;
-        endPoint.line += text.split('\n').length - 1;
-        UI.prompt_simplemde.codemirror.setCursor(endPoint);
-        UI.prompt_simplemde.codemirror.focus();
-    }       
-
-    static promptData () {
-        let title = prompt('Title', '');
-        let text = prompt('Text', '');
-        if (!text || !title){
-            throw new Error('Title and text are required');
-        }
-        text = text.replace(/\/\/n/g, '\n');
-        return {title, text};
-    }
-}
-
-class HandlerSubPromptsList extends HandlerTargetList {
-    static target = TargetSubprompt;
-    static entity = 'subprompt';
-    static form = {
-        'title': {
-            'label': 'Title',
-            'type': 'text',
-            'required': true,
-        },
-        'text': {
-            'label': 'Text',
-            'type': 'textarea',
-            'required': true,
-        },
-    };
-
-    static update (not_refresh, jump) {
-        super.update(not_refresh);
-        if (jump) return;
-        HandlerSubPromptsSelect.update(not_refresh, true);
-    }
-
-    static promptData () {
-        return HandlerSubPromptsSelect.promptData();
-    }
-
-    static change (item) {
-        HandlerSubPromptsSelect.change(item);
-    }
-
-}
-
-//------------------ FastResponses ------------------//
-class TargetFastResponse {
-    static model = FastResponsesModel;
-}
-
-class HandlerFastResponsesList extends HandlerTargetList {
-    static target = TargetFastResponse;
-    static form = {
-        'title': {
-            'label': 'Title',
-            'type': 'text',
-            'required': true,
-        },
-        'text': {
-            'label': 'Text',
-            'type': 'textarea',
-            'required': true,
-        },
-    };
-    static entity = 'fast response';
-
-    
-    
-    static promptData () {
-        let title = prompt('Title', '');
-        let text = prompt('Text', '');
-        if (!title ||  !text){
-            throw new Error('Title and text are required');
-        } 
-        return {title, text};
-    }
-
-    static change (item) {
-        UI.original_text.value = item.text;
-        const button = UI.original_send;
-        button.click();
-    }
-}
-
-/*------------------ Init ------------------*/
-
-class Handlers {
-    static init () {
-        if (!UI.prompt_select){
-            UI.init();
-        }
-        Options.getOptions().then((options) => {
-            HandlerPromptTemplatesSelect.init(UI.prompt_select);
-            HandlerPromptTemplatesOrinalText.init(UI.original_select);
-            HandlerPromptTemplatesClickInit.init(UI.prompt_send_btn);
-            HandlerPromptTemplatesClickSync.init(UI.prompt_sync_btn);
-            HandlerPromptTemplatesClickEmpty.init(UI.prompt_empty_btn);
-            HandlerSubPromptsSelect.init(UI.subprompt_select);
-            HandlerSubPromptsList.init(UI.subprompt_list);
-            HandlerFastResponsesList.init(UI.fastresponse);
-            UI.original_send.addEventListener('click', () => {
-                if (HandlerPromptTemplatesOrinalText.target.value){
-                    let template = HandlerPromptTemplatesOrinalText.target.value.template;
-                    let text = UI.original_text.value;
-                    let result = template.replace(/\[\[PROMPT\]\]/g, text);
-                    UI.original_text.value = result;
-                    HandlerPromptTemplatesOrinalText.select.value = "";
-                    HandlerPromptTemplatesOrinalText.target.value = null;
-                    HandlerPromptTemplatesOrinalText.selected = "";
-                    setTimeout(() => {
-                        const block_first = document.querySelector('.flex + .group');
-                        if (block_first) {
-                            block_first.style.display = 'none';
-                        }
-                    }, 200);
-                }
-            });
-        });
-        
-    }   
-}
-

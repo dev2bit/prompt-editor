@@ -1,3 +1,21 @@
+/*!
+ * Prompt Editor (https://github.com/dev2bit/prompt-editor)
+ * dev2bit (developers@dev2bit.com)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #prompts-ui + main {
     width: 70% !important;
 }
@@ -7,6 +25,7 @@
     height: 100%;
     background-color: #656870;
     padding: 12px;
+    position: relative;
 }
 
 #prompts-prompt {
@@ -326,8 +345,6 @@ button#prompts-prompt-control-bottom-button-init {
     font-size: 100%;
 }
 
-
-
 div#block-prompts-prompt-control-subprompts {
     width: 350%;
 }
@@ -601,12 +618,49 @@ button#prompts-prompt-control-bottom-button-sync.no-sync {
     font-size: 12px;
 }
 
+.group textarea.m-0 + .text-center {
+    opacity: 0.1;
+}
+
+.group:hover textarea.m-0 + .text-center {
+    opacity: 1;
+}
+
+div#prompts-float-bottom {
+    position: absolute;
+    bottom: 4px;
+    right: -38px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgb(101, 104, 112);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+div#prompts-float-bottom button {
+    padding: 4px;
+    border-radius: 4px;
+}
+
+button#prompts-copy-all {
+    background: #da5c29;
+}
+
+button#prompts-copy-responses {
+    background: #ffe6b1;
+}
+
+button#prompts-copy-last {
+    background: #31c098;
+}
+
 @media (max-width: 1900px) {
     .editor-statusbar,
     a[title="Markdown Guide"] {
         display: none;
     }
-    
 }
 
 @media (max-width: 1200px) {
@@ -616,8 +670,8 @@ button#prompts-prompt-control-bottom-button-sync.no-sync {
     #prompts-prompt-control-title {
         display: none;
     }
-    
 }
+
 @media (max-width: 1000px) {
     .editor-toolbar {
         display: none;

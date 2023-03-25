@@ -1,3 +1,21 @@
+/*!
+ * Prompt Editor (https://github.com/dev2bit/prompt-editor)
+ * dev2bit (developers@dev2bit.com)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 class Model {
   static data = [];
 
@@ -99,7 +117,7 @@ class ModelLocalStorage extends Model {
         storage[this.storage_key] = this.data;
         try {
             chrome.runtime.sendMessage({ accion: "setData", storage }, (response) => {
-                console.log("Data saved in Chrome cloud:", response);
+                console.log(`Data saved in Chrome cloud (${this.storage_key})`);
                 resolve(response);
             });
         }catch (error) {
@@ -116,7 +134,7 @@ class ModelLocalStorage extends Model {
         }
 
         chrome.runtime.sendMessage({ accion: "getData", keys: [this.storage_key] }, (response) => {
-            console.log("Data getted from Chrome cloud:", response);
+            console.log(`Data getted from Chrome cloud (${this.storage_key})`);
             if (!response.storage[this.storage_key]) {
                 response.storage[this.storage_key] = [];
             }
@@ -161,11 +179,11 @@ class ModelGitHub extends Model {
                 .then((response) => response.json())
                 .then((commitData) => {
                     this.sha = commitData.content.sha;
-                    console.log("Archivo actualizado:", commitData);
+                    console.log(`Data saved in Github (${this.storage_key})`);
                     resolve(commitData);
                 })
                 .catch((error) => {
-                    console.error("Error al actualizar el archivo:", error);
+                    console.error("Error saving data in Github (${this.storage_key})" , error);
                     reject(error);
                 });
             }catch (error) {
@@ -189,7 +207,7 @@ class ModelGitHub extends Model {
                     if (fileData.sha){
                         this.sha = fileData.sha;
                         const fileContent = decodeURIComponent(escape(window.atob(fileData.content)));
-                        console.log("Contenido del archivo:", fileContent);
+                        console.log(`Data getted from GitHub (${this.storage_key})`);
                         this.data = JSON.parse(fileContent);
                         resolve(this.data);
                     }else{

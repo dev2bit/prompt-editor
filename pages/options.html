@@ -57,54 +57,69 @@
         .github {
             display: none;
         }
+
+        .powerby img {
+            width: 120px;
+        }
+
+        .powerby {
+            position: absolute;
+            bottom: 20px;
+            right: 50px;
+        }
     </style>
   </head>
   <body>
     <div class="container">
-        <div class="logo-container">
-            <img src="/assets/img/logo.png" alt="logo" class="logo">
-        </div>
-        <div class="title-container">
-            <h1 class="title">Configuration</h1>
-        </div>
-        <div class="form-container">
-            <div class="form-group">
-                <label for="storage">Storage Type</label>
-                <div class="form-options">
-                    <label><input type="radio" name="storage" id="local" value="local" checked>Local Storage</label>
-                    <label><input type="radio" name="storage" id="sync" value="sync">Web Storage</label>
-                    <label><input type="radio" name="storage" id="github" value="github">Github</label>
+        <form id="config-form" onsubmit="return false;">
+            <div class="logo-container">
+                <img src="/assets/img/logo.png" alt="logo" class="logo">
+            </div>
+            <div class="title-container">
+                <h1 class="title">Configuration</h1>
+            </div>
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="storage">Storage Type</label>
+                    <div class="form-options">
+                        <label><input type="radio" name="storage" id="local" value="local" checked>Local Storage</label>
+                        <label><input type="radio" name="storage" id="sync" value="sync">Web Storage</label>
+                        <label><input type="radio" name="storage" id="github" value="github">Github</label>
+                    </div>
+                </div>
+                <div class="form-group sync">
+                    <label for="sync-get">GET URL </label>
+                    <input type="text" name="sync-get" id="sync-get" class="form-control">
+                </div>
+                <div class="form-group sync">
+                    <label for="sync-put">PUT URL </label>
+                    <input type="text" name="sync-put" id="sync-put" class="form-control">
+                </div>
+                <div class="form-group github">
+                    <label for="github-token">Github Token</label>
+                    <input type="text" name="github-token" id="github-token" class="form-control">
+                </div>
+                <div class="form-group github">
+                    <label for="github-owner">Github Owner</label>
+                    <input type="text" name="github-owner" id="github-owner" class="form-control">
+                </div>
+                <div class="form-group github">
+                    <label for="github-repository">Github Repository</label>
+                    <input type="text" name="github-repository" id="github-repository" class="form-control">
+
+                </div>
+                <div class="form-group github">
+                    <label for="github-path">Github Path</label>
+                    <input type="text" name="github-path" id="github-path" class="form-control">
+                </div>
+                <div class="form-group save">
+                    <button class="btn btn-primary" id="save">Save</button>
                 </div>
             </div>
-            <div class="form-group sync">
-                <label for="sync-get">GET URL </label>
-                <input type="text" name="sync-get" id="sync-get" class="form-control">
-            </div>
-            <div class="form-group sync">
-                <label for="sync-put">PUT URL </label>
-                <input type="text" name="sync-put" id="sync-put" class="form-control">
-            </div>
-            <div class="form-group github">
-                <label for="github-token">Github Token</label>
-                <input type="text" name="github-token" id="github-token" class="form-control">
-            </div>
-            <div class="form-group github">
-                <label for="github-owner">Github Owner</label>
-                <input type="text" name="github-owner" id="github-owner" class="form-control">
-            </div>
-            <div class="form-group github">
-                <label for="github-repository">Github Repository</label>
-                <input type="text" name="github-repository" id="github-repository" class="form-control">
-
-            </div>
-            <div class="form-group github">
-                <label for="github-path">Github Path</label>
-                <input type="text" name="github-path" id="github-path" class="form-control">
-            </div>
-            <div class="form-group save">
-                <button class="btn btn-primary" id="save">Save</button>
-            </div>
-        </div>
+        </form>
+    </div>
+    <div class="powerby">
+        <p><a href="https://dev2bit.com" target="_blank"><img src="https://dev2bit.com/wp-content/themes/lovecraft_child/assets/icons/dev2bit_monitor2.svg"/></a></p>
     </div>
     <script src="options.js"></script>
   </body>

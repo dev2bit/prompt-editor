@@ -25,10 +25,12 @@
         "vendor/popup/popup.js",
         "vendor/nice-select2/js/nice-select2.js", 
         "vendor/simplemde/simplemde.min.js", 
-        "class/options.js", 
+        "class/depends.js", 
+        "class/config.js", 
         "class/ui.js", 
         "class/models.js", 
         "class/handlers.js", 
+        "class/ui-handlers.js", 
         "main.js"
       ],
       "css": [
