@@ -114,9 +114,11 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
             HandlerPromptTemplatesOrinalText.set_engine_version();
         });
         setTimeout(() => {
-            function change_engine_version () {
-                HandlerPromptTemplatesOrinalText.get_engine_version();
-                console.log('get_engine_version ', HandlerPromptTemplatesOrinalText.select_version);
+            function change_engine_version (mutations) {
+                setTimeout(() => {
+                    HandlerPromptTemplatesOrinalText.get_engine_version();
+                    console.log('get_engine_version ', HandlerPromptTemplatesOrinalText.select_version);
+                }, 700);
             }
             this.engine_observer = new MutationObserver(change_engine_version);
             this.engine_observer.observe(document.querySelector(depends.engine_selector), {
