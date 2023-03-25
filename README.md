@@ -1,6 +1,10 @@
 # Prompt Editor
 
-![Prompt Editor](https://raw.githubusercontent.com/dev2bit/prompt-editor/master/assets/img/logo.png)
+<p align="center">
+  <br/>
+  <img src="https://raw.githubusercontent.com/dev2bit/prompt-editor/master/assets/img/logo.png">
+  <br/>
+</p>
 
 Prompt Editor is a Google Chrome extension designed to manage and edit prompts efficiently and effortlessly. Initially integrated with ChatGPT, the project aims to expand its compatibility with other language models in the future.
 
@@ -39,6 +43,9 @@ If you're interested in contributing to Prompt Editor, please get in touch with 
 The logo for Prompt Editor was created using the [MidJourney](https://www.midjourney.com/) image generation model.
 
 ## About dev2bit
-![dev2bit](https://dev2bit.com/wp-content/themes/lovecraft_child/assets/icons/dev2bit_monitor2.svg) 
-[dev2bit](https://dev2bit.com) is a software development company dedicated to providing innovative and high-quality solutions to our clients. Our team has extensive experience in software development, and we are committed to delivering exceptional results to our customers.
+<p align="center">
+  <img width="460" height="300" src="https://dev2bit.com/wp-content/themes/lovecraft_child/assets/icons/dev2bit_monitor2.svg">
+</p>
+
+[dev2bit](https://dev2bit.com/) is a software development company dedicated to providing innovative and high-quality solutions to our clients. Our team has extensive experience in software development, and we are committed to delivering exceptional results to our customers.
 
