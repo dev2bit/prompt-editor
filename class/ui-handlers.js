@@ -95,6 +95,7 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
     static select_nice = null;
     static select_version = null;
     static engine_observer = null;
+    static value = null;
 
 
     static init (select) {
@@ -166,7 +167,7 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
     }
 
     static replace () {
-        if (this.target.value){
+        if (HandlerPromptTemplatesOrinalText.select.value && this.target.value){
             let template = HandlerPromptTemplatesOrinalText.target.value.template;
             let text = cache_input;
             let result = template.replace(/\[\[PROMPT\]\]/g, text);
@@ -447,7 +448,7 @@ class HandlerCopy extends HandlerTargetClick {
                 text += '> ';
             }
             else if (el.querySelector('ol') || el.tagName == 'OL') {
-                el.querySelectorAll('ol').forEach((li, i) => {
+                el.querySelectorAll('li').forEach((li, i) => {
                     text += `${i + li.textContent}.\n`;
                 });
                 return;

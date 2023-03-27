@@ -77,6 +77,7 @@ class UI {
   static createPromptBlock (target) {
     target.promptsblock = document.createElement('div');
     target.promptsblock.id = 'prompts-prompt';
+    target.classList.add('notranslate');
     target.appendChild(target.promptsblock);
     UI.createPromptControlsTop(target.promptsblock);
     UI.createPromptTextArea(target.promptsblock);
