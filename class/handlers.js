@@ -115,6 +115,8 @@ class HandlerTargetSelect extends HandlerTarget{
                     if (this.new_item) {
                         this.new_item(data);
                     }
+                    await (new Promise(resolve => setTimeout(resolve, 100)));
+                    this.modified();
                 }
             }catch(e){
                 showPopupError(e.message);
@@ -213,7 +215,7 @@ class HandlerTargetSelect extends HandlerTarget{
                                     }
                                     await this.update(true);
                                     this.target.model.setData();
-                                    
+                                    this.modified();
                                 }
                             }
                         }catch(e){
@@ -292,6 +294,7 @@ class HandlerTargetList extends HandlerTarget{
                 await this.target.model.add(data);
                 await this.update(true);
                 this.target.model.setData();
+                this.modified();
             }
         } catch (e) {
             showPopupError(e.message);
@@ -301,6 +304,9 @@ class HandlerTargetList extends HandlerTarget{
 
     this.container.appendChild(block_controls);
 
+  }
+
+  static modified () {
   }
 
   static promptData () {
@@ -324,6 +330,9 @@ class HandlerTargetList extends HandlerTarget{
     }
 
     data.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1).forEach(item => {
+        if (document.querySelector('#list-' + this.container.id + ' li[data-id="' + item.id + '"]')){   
+            return;
+        }
         const option = document.createElement('li');
         option.value = item.id;
         option.dataset.id = item.id;

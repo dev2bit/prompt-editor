@@ -21,7 +21,7 @@ const depends = {
     'original_text': 'textarea[data-id]',
     'original_send': 'textarea[data-id] + button',
     'first_message': '.flex + .group',
-    'first_message_btn': '.text-base .p-1',
+    'first_message_btn': 'main .flex > .group',
     'new_btn': 'nav a.mb-2',
     'engine_selector': '.items-center button',
     'engine_selector_list': '.items-center li span > span',

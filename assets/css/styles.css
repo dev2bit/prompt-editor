@@ -656,6 +656,22 @@ button#prompts-copy-last {
     background: #31c098;
 }
 
+.nice-select.open .nice-select-dropdown{
+    z-index: 10;
+}
+
+.editor-preview.editor-preview-active h1 {
+    margin-bottom: 24px;
+}
+
+.editor-preview.editor-preview-active h2 {
+    margin-bottom: 16px;
+}
+
+.editor-preview.editor-preview-active p {
+    margin-bottom: 8px;
+}
+
 @media (max-width: 1900px) {
     .editor-statusbar,
     a[title="Markdown Guide"] {

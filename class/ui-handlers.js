@@ -229,6 +229,7 @@ class HandlerPromptTemplatesClickInit extends HandlerTargetClick {
         if (btn_first) {
             if (UI.new_btn) {
                 UI.new_btn.click();
+                await new Promise(r => setTimeout(r, 500));
                 HandlerPromptTemplatesOrinalText.set_engine_version();
                 await new Promise(r => setTimeout(r, 500));
             }
@@ -281,7 +282,9 @@ class HandlerPromptTemplatesClickSync extends HandlerTargetClick {
             let template = UI.prompt_simplemde.value().replace(/\[\[.*\]\]/g, '[[PROMPT]]');
             item.template = template;
             await HandlerPromptTemplatesSelect.update(true);    
-            await HandlerPromptTemplatesSelect.target.model.setData();
+            await HandlerPromptTemplatesSelect.target.model.setData().catch(e => {
+                showPopupError(e);
+            });
             HandlerPromptTemplatesClickSync.set_sync();
             HandlerPromptTemplatesSelect.select.value = item.id;
             HandlerPromptTemplatesSelect.selected = item.id;
@@ -316,10 +319,8 @@ class HandlerSubPromptsSelect extends HandlerTargetSelect {
             'required': true,
         },
     };
-    static update (not_refresh, jump) {
-        super.update(not_refresh);
-         if (jump) return;
-        HandlerSubPromptsList.update(not_refresh, true);
+    static modified () {
+        HandlerSubPromptsList.update(true);
     }
     
     static change (item) {
@@ -365,10 +366,8 @@ class HandlerSubPromptsList extends HandlerTargetList {
         },
     };
 
-    static update (not_refresh, jump) {
-        super.update(not_refresh);
-        if (jump) return;
-        HandlerSubPromptsSelect.update(not_refresh, true);
+    static modified () {
+        HandlerSubPromptsList.update(true);
     }
 
     static promptData () {
@@ -420,11 +419,18 @@ class HandlerFastResponsesList extends HandlerTargetList {
     }
 }
 
+
+
 //------------------ Copys ------------------//
 class HandlerCopy extends HandlerTargetClick {
     static target = null;
     static get_text (selector) {
         let text = '';
+        if (!document.querySelectorAll(selector).length) {
+            if (selector.match(/\.markdown > \*/)) {
+                selector = selector.replace(/\.markdown > \*/, '.markdown');
+            }
+        }
         document.querySelectorAll(selector).forEach((el) => {
             if (el.querySelector('h1') || el.tagName == 'H1') {
                 text += '# ';
@@ -448,8 +454,12 @@ class HandlerCopy extends HandlerTargetClick {
                 text += '> ';
             }
             else if (el.querySelector('ol') || el.tagName == 'OL') {
+                var start = el.getAttribute('start');
+                if (!start) {
+                    start = 1;
+                }
                 el.querySelectorAll('li').forEach((li, i) => {
-                    text += `${i + li.textContent}.\n`;
+                    text += `${String(i + new Number(start)) + ". " + li.textContent}. \n`;
                 });
                 return;
             }
