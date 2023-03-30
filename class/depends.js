@@ -19,7 +19,7 @@
 const depends = {
     'main': 'main',
     'original_text': 'textarea[data-id]',
-    'original_send': 'textarea[data-id] + button',
+    'original_send': 'textarea[data-id] ~ button',
     'first_message': '.flex + .group',
     'first_message_btn': 'main .flex > .group',
     'new_btn': 'nav a.mb-2',
@@ -33,4 +33,22 @@ const depends = {
     'msgs_all': 'main .flex > .group .text-base .flex-grow textarea, main .flex > .group .text-base .flex-grow .min-h-\\[20px\\] .markdown > *',
     'msgs_response': 'main .flex > .group.bg-gray-50 .text-base .flex-grow .min-h-\\[20px\\] .markdown > *',
     'msgs_last': 'main .flex > .group:nth-last-child(2) .text-base .flex-grow textarea, main .flex > .group:nth-last-child(2) .text-base .flex-grow .min-h-\\[20px\\]  .markdown > *',
+};
+
+async function getDepend (key) {
+    return document.querySelector(depends[key]);
+    let trys = 0;
+    return new Promise((resolve, reject) => {
+        let interval = setInterval(() => {
+            let depend = document.querySelector(depends[key]);
+            if (depend) {
+                clearInterval(interval);
+                resolve(depend);
+            } else if (trys >= 100) {
+                clearInterval(interval);
+                reject('Depend not found');
+            }
+            trys++;
+        }, 100);
+    });
 };

@@ -46,7 +46,8 @@ class HandlerPromptTemplatesSelect extends HandlerTargetSelect {
         HandlerPromptTemplatesClickSync.set_sync();
     }
 
-    static change (item) {
+    static async change (item) {
+        UI.original_text = await getDepend('original_text');
         let prompt_text = UI.original_text.value.trim();
         if (item) {
             let text = item.template;
@@ -58,6 +59,7 @@ class HandlerPromptTemplatesSelect extends HandlerTargetSelect {
             UI.prompt_simplemde.value('');
         }
         HandlerPromptTemplatesClickSync.set_sync();
+        UI.original_text = await getDepend('original_text');
         cache_input = UI.original_text.value;
     }
 
@@ -72,7 +74,8 @@ class HandlerPromptTemplatesSelect extends HandlerTargetSelect {
         return {'title': title, 'template': ""};
     }
 
-    static keypress (e) {
+    static async keypress (e) {
+        UI.original_text = await getDepend('original_text');
         cache_input = UI.original_text.value;
         if (e.keyCode == 13) {
             e.preventDefault();
@@ -98,8 +101,9 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
     static value = null;
 
 
-    static init (select) {
+    static async init (select) {
         super.init(select);
+        UI.original_send = await getDepend('original_send');
         UI.original_send.addEventListener('click', () => {
             HandlerPromptTemplatesOrinalText.replace();
         });
@@ -108,13 +112,14 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
                 HandlerPromptTemplatesOrinalText.replace();
             }
         });
-        UI.original_text.addEventListener('keyup', (e) => {
+        UI.original_text.addEventListener('keyup', async (e) => {
+            UI.original_text = await getDepend('original_text');
             cache_input = UI.original_text.value;
         });
         UI.new_btn.addEventListener('click', () => {
             HandlerPromptTemplatesOrinalText.set_engine_version();
         });
-        setTimeout(() => {
+        setTimeout(async () => {
             function change_engine_version (mutations) {
                 setTimeout(() => {
                     HandlerPromptTemplatesOrinalText.get_engine_version();
@@ -122,16 +127,16 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
                 }, 700);
             }
             this.engine_observer = new MutationObserver(change_engine_version);
-            this.engine_observer.observe(document.querySelector(depends.engine_selector), {
+            this.engine_observer.observe(await getDepend('engine_selector'), {
                 attributes: true,
                 childList: true,
                 characterData: true,
             });
         }, 700);        
-        setTimeout(() => {
+        setTimeout(async () => {
             function add_btn () {
-                setTimeout(() => {
-                    let element = document.querySelector(depends.stop_btn);
+                setTimeout(async () => {
+                    let element = await getDepend('stop_btn');
                     if (element) {
                         element.addEventListener('click', () => {
                             setTimeout(() => { 
@@ -142,7 +147,7 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
                 }, 200);
             }
             this.engine_observer = new MutationObserver(add_btn);
-            this.engine_observer.observe(document.querySelector(depends.stop_btn_container), {
+            this.engine_observer.observe(await getDepend('stop_btn_container'), {
                 attributes: true,
                 childList: true,
                 characterData: true,
@@ -166,17 +171,18 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
         }, 200);
     }
 
-    static replace () {
+    static async replace () {
         if (HandlerPromptTemplatesOrinalText.select.value && this.target.value){
             let template = HandlerPromptTemplatesOrinalText.target.value.template;
             let text = cache_input;
             let result = template.replace(/\[\[PROMPT\]\]/g, text);
+            UI.original_text = await getDepend('original_text');
             UI.original_text.value = result;
             this.select.value = "";
             this.target.value = null;
             this.selected = "";
-            setTimeout(() => {
-                const block_first = document.querySelector(depends.first_message);
+            setTimeout(async () => {
+                const block_first = await getDepend('first_message');
                 if (block_first) {
                     block_first.style.display = 'none';
                 }
@@ -185,8 +191,8 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
         this.openedit();
     }
 
-    static get_engine_version () {
-        this.select_version = document.querySelector(depends.engine_selector_current);
+    static async get_engine_version () {
+        this.select_version = await getDepend('engine_selector_current');
         if (this.select_version) {
             this.select_version = this.select_version.innerHTML;
         }
@@ -195,7 +201,7 @@ class HandlerPromptTemplatesOrinalText extends HandlerPromptTemplatesSelect {
     static async set_engine_version () {
         await new Promise(r => setTimeout(r, 400));
         if (HandlerPromptTemplatesOrinalText.select_version){
-            document.querySelector(depends.engine_selector).click();
+            (await getDepend('engine_selector')).click();
             await new Promise(r => setTimeout(r, 200));
             document.querySelectorAll(depends.engine_selector_list).forEach(item => {
                 if (item.innerHTML == HandlerPromptTemplatesOrinalText.select_version) {
@@ -225,7 +231,7 @@ class HandlerPromptTemplatesClickEmpty extends HandlerTargetClick {
 class HandlerPromptTemplatesClickInit extends HandlerTargetClick {
     static target = TargetPrompt;
     static async click (item) {
-        const btn_first = document.querySelector(depends.first_message_btn);
+        const btn_first = await getDepend('first_message_btn');
         if (btn_first) {
             if (UI.new_btn) {
                 UI.new_btn.click();
@@ -236,12 +242,14 @@ class HandlerPromptTemplatesClickInit extends HandlerTargetClick {
         }else {
             HandlerPromptTemplatesOrinalText.get_engine_version();
         }
+        UI.original_text = await getDepend('original_text');
         UI.original_text.value = UI.prompt_simplemde.value();
+        UI.original_send = await getDepend('original_send');
         const button = UI.original_send;
         UI.main.classList.add('prompt-editor-run');
         button.click();
-        setTimeout(() => {
-            const block_first = document.querySelector(depends.first_message);
+        setTimeout(async () => {
+            const block_first = await getDepend('first_message');
             if (block_first) {
                 block_first.style.display = 'none';
             }
@@ -412,7 +420,9 @@ class HandlerFastResponsesList extends HandlerTargetList {
         return {title, text};
     }
 
-    static change (item) {
+    static async change (item) {
+        UI.original_text = await getDepend('original_text');
+        UI.original_send = await getDepend('original_send');
         UI.original_text.value = item.text;
         const button = UI.original_send;
         button.click();
@@ -461,6 +471,32 @@ class HandlerCopy extends HandlerTargetClick {
                 el.querySelectorAll('li').forEach((li, i) => {
                     text += `${String(i + new Number(start)) + ". " + li.textContent}. \n`;
                 });
+                return;
+            }
+            
+            else if (el.querySelector('table') || el.tagName == 'TABLE') {
+                el.querySelectorAll('tr').forEach((li, i) => {
+                    if (li.querySelector('th')){
+                        text += '| ';
+                        li.querySelectorAll('th').forEach((li, i) => {
+                            text += `${li.textContent} | `;
+                        });
+                        text += '\n';
+                        text += '| ';
+                        li.querySelectorAll('th').forEach((li, i) => {
+                            text += `-----|`;
+                        });
+                        text += '\n';
+                    }
+                    if (li.querySelector('td')){
+                        text += '| ';
+                        li.querySelectorAll('td').forEach((li, i) => {
+                            text += `${li.textContent} | `;
+                        });
+                        text += '\n';
+                    }
+                });
+                text += '\n';
                 return;
             }
             else if (el.querySelector('code') || el.tagName == 'CODE') {

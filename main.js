@@ -42,7 +42,9 @@ function initPromptEditor(mutations) {
 
 initPromptEditor();
 
-main_observer = new MutationObserver(initPromptEditor);
+main_observer = new MutationObserver(() => {
+    setTimeout(initPromptEditor, 100);
+});
 main_observer.observe(document.getElementById('__next'), {
     attributes: true,
     childList: true,
