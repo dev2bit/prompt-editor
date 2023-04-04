@@ -36,7 +36,11 @@ const depends = {
 };
 
 async function getDepend (key) {
-    return document.querySelector(depends[key]);
+    let item = document.querySelector(depends[key]);
+    if (item) {
+        item.disabled = false;
+    }
+    return item;
     let trys = 0;
     return new Promise((resolve, reject) => {
         let interval = setInterval(() => {
