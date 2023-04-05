@@ -16,6 +16,10 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+#__next > div > .flex.h-full.flex-1.flex-col {
+  width: calc(100% - 260px);
+}
+
 #prompts-ui + main {
     width: 70% !important;
 }
