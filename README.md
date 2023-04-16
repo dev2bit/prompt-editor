@@ -25,10 +25,9 @@ Explore the full potential of Prompt Editor by creating and editing prompts, per
 Join us on our journey as we continue to develop and expand the capabilities of Prompt Editor to support more language models and improve your overall experience. Don't forget to star our GitHub repository and contribute to the project's growth!
 
 
-## Configure Prompt Editor to store prompts in a GitHub repository.
+## Configure Prompt Editor to store prompts in a GitHub repository
 
 ### Create an empty repository on GitHub:
-To create an empty repository on GitHub, follow these simple steps:
 1. Sign up or log in to your GitHub account at https://github.com/.
 2. Click on the "+" symbol in the top right corner of the screen and select "New repository".
 3. Assign a name to the repository and, optionally, a description.
@@ -37,7 +36,6 @@ To create an empty repository on GitHub, follow these simple steps:
 6. Click on "Create repository" to finish the process.
 
 ### Generate an API Token to access the repository:
-To obtain an API Token that allows a Chrome extension to access your repository, follow these steps:
 1. Go to your GitHub profile settings page by clicking on your profile picture in the top right corner and selecting "Settings".
 2. In the left sidebar menu, select "Developer settings".
 3. Next, select "Personal access tokens".
@@ -52,7 +50,7 @@ Once you have created the repository and obtained the API Token, you will need t
 3. Github Repository: This is the name of the repository you created in step 1.
 4. Github Path: This is the path within the repository where you want the extension to read or write files. If it is a repository only for this purpose, you can use the root directory "/".
 
-### Configure Prompt Editor
+### Configure Prompt Editor:
 1. Open the extension options from the toolbar button or from the extension manager.
 2. Select Storage Type: GitHub
 3. Complete the requested inputs with the data obtained in the previous step.
