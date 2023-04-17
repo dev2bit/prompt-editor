@@ -22,7 +22,7 @@ const depends = {
     'original_send': 'textarea[data-id] ~ button',
     'first_message': '.flex + .group',
     'first_message_btn': 'main .flex > .group',
-    'new_btn': 'nav a.mb-2',
+    'new_btn': 'nav > a.py-3.px-3',
     'engine_selector': '.items-center button',
     'engine_selector_list': '.items-center li span > span',
     'engine_selector_current': 'span.flex.h-6.items-center.gap-1.truncate',
