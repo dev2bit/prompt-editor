@@ -24,6 +24,37 @@ Explore the full potential of Prompt Editor by creating and editing prompts, per
 
 Join us on our journey as we continue to develop and expand the capabilities of Prompt Editor to support more language models and improve your overall experience. Don't forget to star our GitHub repository and contribute to the project's growth!
 
+
+## Configure Prompt Editor to store prompts in a GitHub repository
+
+### Create an empty repository on GitHub:
+1. Sign up or log in to your GitHub account at https://github.com/.
+2. Click on the "+" symbol in the top right corner of the screen and select "New repository".
+3. Assign a name to the repository and, optionally, a description.
+4. Choose whether you want the repository to be public or private. You will usually want it to be private so that not everyone has access to your personal or work team prompts.
+5. Complete the options according to your preferences or do not select any additional options so that the repository is empty.
+6. Click on "Create repository" to finish the process.
+
+### Generate an API Token to access the repository:
+1. Go to your GitHub profile settings page by clicking on your profile picture in the top right corner and selecting "Settings".
+2. In the left sidebar menu, select "Developer settings".
+3. Next, select "Personal access tokens".
+4. Click on "Generate new token".
+5. Assign a descriptive name to the token, give it repository access, and select the Contents repo-scope for reading and writing.
+6. Click on "Generate token" to create the token. Be sure to copy the generated token and store it in a safe place, as you will not be able to see it again.
+
+### Obtain the Github Token, Github Owner, Github Repository, and Github Path:
+Once you have created the repository and obtained the API Token, you will need the following information to interact with the repository from the extension:
+1. Github Token: This is the personal access token you generated in step 2. Make sure to store it securely and not share it publicly.
+2. Github Owner: This is the username of the GitHub account where the repository was created.
+3. Github Repository: This is the name of the repository you created in step 1.
+4. Github Path: This is the path within the repository where you want the extension to read or write files. If it is a repository only for this purpose, you can use the root directory "/".
+
+### Configure Prompt Editor:
+1. Open the extension options from the toolbar button or from the extension manager.
+2. Select Storage Type: GitHub
+3. Complete the requested inputs with the data obtained in the previous step.
+
 ## Authors
 
 Prompt Editor is a free and open-source software project developed by the team at dev2bit. Our mission is to improve work processes and provide a valuable tool to the community.
